@@ -1,66 +1,45 @@
 # SQL para Análise de Dados de Negócio
 
-Aprenda a analisar bancos de dados de negócio com SQL por meio de exercícios e projetos com quem trabalha com isso.
+Projeto educacional desenvolvido para consolidar conhecimentos em SQL aplicados à análise de dados, utilizando exercícios práticos, consultas analíticas e projetos orientados a cenários de negócio.
 
-## Sobre o Curso
+## Objetivos
 
-Este material foi desenvolvido para fornecer uma base sólida em SQL aplicado à análise de dados empresariais, permitindo ao estudante aprender desde os conceitos fundamentais até a construção de projetos práticos utilizados no mercado.
+Este projeto aborda conceitos fundamentais e intermediários de SQL por meio da resolução de problemas, manipulação de dados e construção de análises aplicadas ao contexto empresarial.
 
-Ao longo do curso serão abordados conceitos essenciais para manipulação, consulta, tratamento e análise de dados, utilizando PostgreSQL e pgAdmin como ambiente de desenvolvimento.
+Entre os principais objetivos estão:
 
----
-
-# Objetivos de Aprendizagem
-
-Ao concluir este conteúdo você será capaz de:
-
-- Configurar um ambiente SQL local
-- Utilizar PostgreSQL e pgAdmin
-- Realizar consultas em bancos de dados relacionais
-- Aplicar filtros e ordenações
-- Utilizar funções agregadas
-- Criar agrupamentos de informações
-- Trabalhar com múltiplas tabelas
-- Utilizar subconsultas
-- Tratar dados textuais e temporais
-- Manipular tabelas e registros
-- Desenvolver análises de negócio
-- Construir projetos práticos utilizando SQL
+- Consultar informações em bancos de dados relacionais;
+- Filtrar, ordenar e agrupar dados;
+- Realizar análises exploratórias;
+- Manipular tabelas e registros;
+- Trabalhar com múltiplas tabelas;
+- Desenvolver consultas analíticas;
+- Aplicar SQL em problemas de negócio;
+- Construir projetos utilizando dados reais ou simulados.
 
 ---
 
-# Conteúdo Programático
+# Conteúdo Desenvolvido
 
-## Seção 1 — Configuração do Ambiente de Trabalho
+## Seção 1 — Configuração do Ambiente
 
-### Configurações
-Configurações iniciais do ambiente de desenvolvimento.
-
-### Configuração da Máquina
-Instalação das ferramentas necessárias para trabalhar com SQL localmente.
-
-### Overview do pgAdmin
-Conhecendo a interface do pgAdmin e suas principais funcionalidades.
-
-### Configuração do Banco de Dados
-Criação e preparação do banco de dados para utilização durante o curso.
-
-### Instalação Local vs Playground SQL
-Vantagens e limitações das duas abordagens.
-
-### Material de Apoio
-Arquivos complementares para estudo e exercícios.
+- Configurações iniciais
+- Configuração da máquina
+- Visão geral do pgAdmin
+- Configuração do banco de dados
+- Ambiente local versus playground SQL
+- Material de apoio
 
 ---
 
 ## Seção 2 — Comandos Básicos
 
-### Dinâmica do Curso
-Metodologia de ensino e organização das atividades.
-
-### SELECT
-
-O comando SELECT é utilizado para recuperar informações armazenadas em tabelas.
+- SELECT
+- DISTINCT
+- WHERE
+- ORDER BY
+- LIMIT
+- Exercícios práticos
 
 Exemplo:
 
@@ -69,31 +48,7 @@ SELECT *
 FROM clientes;
 ```
 
-Selecionando colunas específicas:
-
-```sql
-SELECT
-nome,
-cidade
-FROM clientes;
-```
-
----
-
-### DISTINCT
-
-Remove valores duplicados.
-
-```sql
-SELECT DISTINCT cidade
-FROM clientes;
-```
-
----
-
-### WHERE
-
-Filtragem de registros.
+Filtrando registros:
 
 ```sql
 SELECT *
@@ -101,19 +56,7 @@ FROM clientes
 WHERE idade > 30;
 ```
 
----
-
-### ORDER BY
-
-Ordenação dos resultados.
-
-```sql
-SELECT *
-FROM clientes
-ORDER BY nome;
-```
-
-Ordem decrescente:
+Ordenando resultados:
 
 ```sql
 SELECT *
@@ -123,134 +66,129 @@ ORDER BY faturamento DESC;
 
 ---
 
-### LIMIT
-
-Limita a quantidade de registros retornados.
-
-```sql
-SELECT *
-FROM clientes
-LIMIT 10;
-```
-
----
-
-### Exercícios
-
-- Liste todos os clientes.
-- Liste apenas cidades distintas.
-- Filtre clientes acima de 40 anos.
-- Retorne os 20 primeiros registros.
-- Ordene os clientes por faturamento.
-
----
-
 ## Seção 3 — Operadores
 
-### Operadores Aritméticos
+### Operadores aritméticos
 
 ```sql
 SELECT
 preco * quantidade
 AS valor_total
-FROM vendas;
+FROM pedidos;
 ```
 
-Operadores disponíveis:
-
-- +
-- -
-- *
-- /
-- %
-
----
-
-### Operadores de Comparação
+### Operadores de comparação
 
 ```sql
-WHERE idade > 18
-```
-
-```sql
-WHERE salario >= 5000
+WHERE idade >= 18
 ```
 
 ```sql
 WHERE categoria = 'Premium'
 ```
 
-Principais operadores:
-
-- =
-- >
-- <
-- >=
-- <=
-- <>
-- !=
-
----
-
-### Operadores Lógicos
-
-AND
+### Operadores lógicos
 
 ```sql
-WHERE cidade = 'São Paulo'
-AND idade > 25
+WHERE estado='MG'
+AND vendas > 100
 ```
 
-OR
-
 ```sql
-WHERE cidade = 'Belo Horizonte'
-OR cidade = 'Rio de Janeiro'
-```
-
-NOT
-
-```sql
-WHERE NOT status = 'Inativo'
+WHERE cidade='Belo Horizonte'
+OR cidade='São Paulo'
 ```
 
 ---
 
 ## Seção 4 — Funções Agregadas
 
-As funções agregadas resumem informações de conjuntos de dados.
+As funções agregadas permitem resumir conjuntos de dados e gerar indicadores importantes para análises de negócio.
 
 ### COUNT
+
+Retorna a quantidade de registros.
 
 ```sql
 SELECT COUNT(*)
 FROM clientes;
 ```
 
+Exemplo:
+
+```sql
+SELECT
+cidade,
+COUNT(*) AS quantidade_clientes
+FROM clientes
+GROUP BY cidade;
+```
+
 ---
 
 ### SUM
 
+Realiza a soma dos valores.
+
 ```sql
-SELECT SUM(valor)
+SELECT
+SUM(valor)
+AS receita_total
 FROM vendas;
+```
+
+Exemplo:
+
+```sql
+SELECT
+categoria,
+SUM(valor) AS faturamento
+FROM vendas
+GROUP BY categoria;
 ```
 
 ---
 
 ### AVG
 
+Calcula a média.
+
 ```sql
-SELECT AVG(valor)
+SELECT
+AVG(valor)
+AS ticket_medio
 FROM vendas;
+```
+
+Exemplo:
+
+```sql
+SELECT
+estado,
+AVG(valor) AS media_vendas
+FROM vendas
+GROUP BY estado;
 ```
 
 ---
 
 ### MIN
 
+Retorna o menor valor encontrado.
+
 ```sql
-SELECT MIN(valor)
+SELECT
+MIN(valor)
+AS menor_venda
+FROM vendas;
+```
+
+Exemplo:
+
+```sql
+SELECT
+MIN(data_venda)
+AS primeira_venda
 FROM vendas;
 ```
 
@@ -258,8 +196,21 @@ FROM vendas;
 
 ### MAX
 
+Retorna o maior valor encontrado.
+
 ```sql
-SELECT MAX(valor)
+SELECT
+MAX(valor)
+AS maior_venda
+FROM vendas;
+```
+
+Exemplo:
+
+```sql
+SELECT
+MAX(data_venda)
+AS ultima_venda
 FROM vendas;
 ```
 
@@ -267,7 +218,7 @@ FROM vendas;
 
 ### GROUP BY
 
-Agrupa registros.
+Agrupa registros por categorias.
 
 ```sql
 SELECT
@@ -277,26 +228,52 @@ FROM clientes
 GROUP BY cidade;
 ```
 
+Outro exemplo:
+
+```sql
+SELECT
+marca,
+SUM(valor)
+FROM vendas
+GROUP BY marca;
+```
+
 ---
 
 ### HAVING
 
-Filtra agrupamentos.
+Filtra resultados após o agrupamento.
 
 ```sql
 SELECT
 cidade,
 COUNT(*)
+
 FROM clientes
+
 GROUP BY cidade
+
 HAVING COUNT(*) > 10;
 ```
+
+Exemplo:
+
+```sql
+SELECT
+categoria,
+SUM(valor)
+
+FROM vendas
+
+GROUP BY categoria
+
+HAVING SUM(valor) > 50000;
 
 ---
 
 ## Seção 5 — JOINs
 
-JOINs permitem combinar informações de múltiplas tabelas.
+Relacionamento entre tabelas.
 
 ### INNER JOIN
 
@@ -304,41 +281,47 @@ JOINs permitem combinar informações de múltiplas tabelas.
 SELECT
 c.nome,
 p.valor
+
 FROM clientes c
+
 INNER JOIN pedidos p
+
 ON c.id = p.cliente_id;
 ```
-
----
 
 ### LEFT JOIN
 
 ```sql
 SELECT *
+
 FROM clientes c
+
 LEFT JOIN pedidos p
+
 ON c.id = p.cliente_id;
 ```
-
----
 
 ### RIGHT JOIN
 
 ```sql
 SELECT *
+
 FROM clientes c
+
 RIGHT JOIN pedidos p
+
 ON c.id = p.cliente_id;
 ```
-
----
 
 ### FULL JOIN
 
 ```sql
 SELECT *
+
 FROM clientes c
+
 FULL JOIN pedidos p
+
 ON c.id = p.cliente_id;
 ```
 
@@ -346,29 +329,17 @@ ON c.id = p.cliente_id;
 
 ## Seção 6 — UNION
 
-Combina conjuntos de resultados.
+Combinação de resultados provenientes de diferentes consultas.
 
 ```sql
 SELECT nome
+
 FROM clientes
 
 UNION
 
 SELECT nome
-FROM fornecedores;
-```
 
----
-
-UNION ALL
-
-```sql
-SELECT nome
-FROM clientes
-
-UNION ALL
-
-SELECT nome
 FROM fornecedores;
 ```
 
@@ -376,15 +347,17 @@ FROM fornecedores;
 
 ## Seção 7 — Subqueries
 
-Subconsultas permitem consultas dentro de outras consultas.
+Subconsultas aplicadas em análises de dados.
 
 ```sql
 SELECT *
+
 FROM clientes
 
 WHERE id IN (
 
 SELECT cliente_id
+
 FROM pedidos
 
 );
@@ -392,89 +365,43 @@ FROM pedidos
 
 ---
 
-Subquery Escalar
+## Seção 8 — Tratamento de Dados
+
+### Conversão de tipos
 
 ```sql
 SELECT
+CAST(valor AS INTEGER)
 
-nome,
-
-(
-
-SELECT AVG(valor)
-FROM vendas
-
-)
-
-FROM clientes;
-```
-
----
-
-## Seção 8 — Tratamento de Dados
-
-### Conversão de Tipos
-
-```sql
-SELECT CAST(valor AS INTEGER)
 FROM vendas;
 ```
 
----
-
-### Tratamento de Texto
-
-UPPER
+### Tratamento de texto
 
 ```sql
 SELECT UPPER(nome)
 FROM clientes;
 ```
 
-LOWER
-
 ```sql
 SELECT LOWER(nome)
 FROM clientes;
 ```
-
-LENGTH
-
-```sql
-SELECT LENGTH(nome)
-FROM clientes;
-```
-
-TRIM
 
 ```sql
 SELECT TRIM(nome)
 FROM clientes;
 ```
 
----
-
-### Tratamento de Datas
-
-Data atual
+### Tratamento de datas
 
 ```sql
 SELECT CURRENT_DATE;
 ```
 
-Ano
-
 ```sql
 SELECT EXTRACT(YEAR FROM data_venda);
 ```
-
-Mês
-
-```sql
-SELECT EXTRACT(MONTH FROM data_venda);
-```
-
-Diferença entre datas
 
 ```sql
 SELECT AGE(CURRENT_DATE,data_nascimento);
@@ -498,29 +425,17 @@ cidade VARCHAR(50)
 );
 ```
 
----
-
 ### INSERT
 
 ```sql
-INSERT INTO clientes (
+INSERT INTO clientes
 
-nome,
-cidade
-
-)
+(nome,cidade)
 
 VALUES
 
-(
-
-'Maria',
-'Belo Horizonte'
-
-);
+('Maria','Belo Horizonte');
 ```
-
----
 
 ### UPDATE
 
@@ -532,8 +447,6 @@ SET cidade='São Paulo'
 WHERE id=1;
 ```
 
----
-
 ### DELETE
 
 ```sql
@@ -541,8 +454,6 @@ DELETE FROM clientes
 
 WHERE id=1;
 ```
-
----
 
 ### ALTER TABLE
 
@@ -554,127 +465,312 @@ ADD telefone VARCHAR(20);
 
 ---
 
+# Projetos Desenvolvidos
+
 ## Projeto 1 — Dashboard de Acompanhamento de Vendas
 
-Objetivo:
+Projeto desenvolvido para criação de indicadores de desempenho comercial utilizando SQL aplicado à análise de negócios.
 
-Construir indicadores de desempenho comercial utilizando SQL.
+### Objetivos
 
-Exemplos de métricas:
+Construir um dashboard analítico contendo métricas de vendas, conversão e comportamento dos clientes.
 
-- Receita Total
-- Ticket Médio
-- Quantidade de Pedidos
-- Clientes Ativos
-- Crescimento Mensal
-- Produtos Mais Vendidos
+### Indicadores desenvolvidos
 
-Consultas aplicadas:
+- Leads gerados por período
+- Quantidade de vendas
+- Receita total
+- Taxa de conversão
+- Ticket médio
+- Estados com maior volume de vendas
+- Marcas mais vendidas
+- Lojas com maior desempenho
+- Dias da semana com maior volume de visitas
+
+### Consultas realizadas
+
+#### Receita, Leads, Conversão e Ticket Médio
+
+Indicadores calculados mensalmente:
+
+- Leads (#)
+- Vendas (#)
+- Receita
+- Conversão (%)
+- Ticket médio
 
 ```sql
+WITH leads AS (
+
 SELECT
 
-SUM(valor)
+DATE_TRUNC('month',visit_page_date) AS mes,
 
-AS receita
+COUNT(*) AS leads
 
-FROM vendas;
+FROM sales.funnel
+
+GROUP BY mes
+
+)
+
+SELECT *
+
+FROM leads;
 ```
 
 ---
 
+#### Estados com maior volume de vendas
+
 ```sql
 SELECT
 
-categoria,
+estado,
 
-SUM(valor)
+COUNT(*) AS vendas
 
-FROM vendas
+FROM sales.customers
 
-GROUP BY categoria;
+GROUP BY estado
+
+ORDER BY vendas DESC;
 ```
 
 ---
 
-## Projeto 2 — Análise do Perfil dos Clientes
+#### Marcas que mais venderam
 
-Objetivo:
+```sql
+SELECT
 
-Compreender o comportamento dos clientes utilizando consultas analíticas.
+brand,
 
-Indicadores:
+COUNT(*)
 
+FROM sales.products
+
+GROUP BY brand
+
+ORDER BY COUNT(*) DESC;
+```
+
+---
+
+#### Lojas com maior desempenho
+
+```sql
+SELECT
+
+store_name,
+
+COUNT(*)
+
+FROM sales.stores
+
+GROUP BY store_name;
+```
+
+---
+
+#### Dias da semana com mais visitas
+
+```sql
+SELECT
+
+EXTRACT(DOW FROM visit_page_date),
+
+COUNT(*)
+
+FROM sales.funnel
+
+GROUP BY 1;
+```
+
+---
+
+### Competências Aplicadas
+
+- Business Intelligence
+- Indicadores Comerciais
+- Funções agregadas
+- JOINs
+- Subqueries
+- Conversão de métricas
+- KPIs
+- Análise temporal
+- SQL Analítico
+
+---
+
+## Projeto 2 — Perfil dos Leads
+
+Projeto focado em segmentação e análise exploratória do comportamento dos leads.
+
+### Objetivos
+
+Identificar características demográficas, profissionais e comportamentais dos usuários.
+
+### Análises realizadas
+
+- Distribuição por gênero
+- Status profissional
 - Faixa etária
-- Cidade
-- Frequência de compra
-- Perfil de consumo
-- Segmentação
+- Faixa salarial
+- Classificação dos veículos visitados
+- Idade média dos veículos
+- Modelos mais visitados
+- Marcas mais acessadas
 
-Exemplo:
+### Consultas desenvolvidas
+
+#### Distribuição por gênero
 
 ```sql
 SELECT
 
-cidade,
+genero,
+
+COUNT(*) AS leads
+
+FROM clientes
+
+GROUP BY genero;
+```
+
+---
+
+#### Status profissional
+
+```sql
+SELECT
+
+status_profissional,
+
+COUNT(*) AS leads
+
+FROM clientes
+
+GROUP BY status_profissional;
+```
+
+---
+
+#### Faixa etária
+
+```sql
+SELECT
+
+faixa_etaria,
 
 COUNT(*)
 
 FROM clientes
 
-GROUP BY cidade;
-
+GROUP BY faixa_etaria;
 ```
 
 ---
 
-# Exercícios Propostos
+#### Faixa salarial
 
-### Exercício 1
+```sql
+SELECT
 
-Liste todos os clientes.
+faixa_salarial,
 
----
+COUNT(*)
 
-### Exercício 2
+FROM clientes
 
-Retorne apenas cidades distintas.
-
----
-
-### Exercício 3
-
-Liste os 10 clientes com maior faturamento.
+GROUP BY faixa_salarial;
+```
 
 ---
 
-### Exercício 4
+#### Classificação dos veículos
 
-Calcule o valor médio das vendas.
+```sql
+CASE
 
----
+WHEN idade_veiculo <= 2
+THEN 'Novo'
 
-### Exercício 5
+ELSE 'Seminovo'
 
-Identifique as cinco categorias com maior receita.
-
----
-
-### Exercício 6
-
-Conte quantos clientes existem por estado.
+END
+```
 
 ---
 
-### Exercício 7
+#### Veículos mais visitados
 
-Utilize JOIN para relacionar clientes e pedidos.
+```sql
+SELECT
+
+brand,
+
+model,
+
+COUNT(*) AS visitas
+
+FROM sales.products
+
+GROUP BY brand,model;
+```
 
 ---
 
-### Exercício 8
+### Competências Aplicadas
 
-Utilize subqueries para identificar clientes acima da média de compras.
+- Segmentação de clientes
+- Análise comportamental
+- Regras de negócio
+- Classificação de dados
+- Tratamento de datas
+- CTEs
+- CASE WHEN
+- SQL Analítico
+- Data Analytics
+
+---
+
+## Tecnologias Utilizadas
+
+- SQL
+- PostgreSQL
+- pgAdmin
+
+---
+
+## Conceitos Aplicados
+
+- SQL para Negócios
+- Business Intelligence
+- Data Analytics
+- KPIs
+- Modelagem Analítica
+- Tratamento de Dados
+- Segmentação de Clientes
+- Consultas Analíticas
+- Dashboards
+- Análise Exploratória
+
+---
+
+# Exercícios
+
+Ao longo do projeto foram desenvolvidos exercícios envolvendo:
+
+- Consultas básicas
+- Filtros
+- Ordenação
+- Agregações
+- Relacionamentos
+- Subconsultas
+- Manipulação de registros
+- Tratamento de dados
+- Análises exploratórias
 
 ---
 
@@ -683,40 +779,9 @@ Utilize subqueries para identificar clientes acima da média de compras.
 - SQL
 - PostgreSQL
 - pgAdmin
-- Business Intelligence
-- Data Analytics
-
----
-
-# Competências Desenvolvidas
-
-- SQL para negócios
-- Extração de dados
-- Tratamento de dados
-- Modelagem analítica
-- Criação de consultas
-- Indicadores de desempenho
-- Segmentação de clientes
-- Análise exploratória
-- Construção de dashboards
-- Pensamento analítico
-
----
-
-# Projeto Final
-
-Ao término do curso o aluno terá desenvolvido dois projetos completos:
-
-### Dashboard de Acompanhamento de Vendas
-
-Análise comercial utilizando SQL.
-
-### Análise do Perfil dos Clientes
-
-Segmentação e análise comportamental aplicada a negócios.
 
 ---
 
 ## Licença
 
-Material disponibilizado exclusivamente para fins educacionais.
+Projeto desenvolvido exclusivamente para fins educacionais.
